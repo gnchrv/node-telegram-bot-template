@@ -10,7 +10,7 @@ const bot = new TelegramBot(
     process.env.TELEGRAM_BOT_TOKEN, { polling: true }
 )
 
-// Define a RegExp for a start message
+// Define a RegExp for the start message
 const startMessageRE = /\/start/
 
 // Configure a greeting message
@@ -18,16 +18,16 @@ bot.onText(startMessageRE, msg => {
     bot.sendMessage(msg.chat.id, 'Hello, this is a bot!')
 })
 
-// Configure a response to text messages
+// Configure a response to other text messages
 bot.on('text', msg => {
 
-    // Determine if it’s a start message, and skip if so
+    // Determine if it’s a start message, and skip it if so
     if (msg.text.match(startMessageRE)) return
 
     // Compose a sample keyboard layout
     const keyboard = [['First', 'Second'], ['Third', 'Fourth']]
 
-    // Reponse with the received text and a sample keyboard
+    // Response with the received text and the sample keyboard
     bot.sendMessage(
         msg.chat.id,
         msg.text,
@@ -35,7 +35,7 @@ bot.on('text', msg => {
     )
 })
 
-// Starting a server for continious polling
+// Start a server for continious polling
 const port = process.env.PORT
 new Server().listen({ port }, () =>
     console.log(`📱 Telegram Bot is running on port ${port}`)
